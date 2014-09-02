@@ -6,8 +6,8 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
+import Foundation
 import SwiftShell
-//import Foundation
 import XCTest
 
 class Scripts_Tests: XCTestCase {
@@ -37,14 +37,14 @@ class Scripts_Tests: XCTestCase {
 		case  task.terminationReason == .UncaughtSignal :
 			errorstring += ("uncaught signal, ")
 		default:
-			1
+			Void()
 		}
 		let standarderror = error.fileHandleForReading.read()
 		if !standarderror.isEmpty {
 			errorstring += standarderror
 		}
 		if !errorstring.isEmpty {
-			XCTFail("Script \(filename) failed because: \(errorstring)")
+			XCTFail("Script '\(filename)' failed because: \(errorstring)")
 		}
 		
 		return output.fileHandleForReading.read()
@@ -53,6 +53,7 @@ class Scripts_Tests: XCTestCase {
 	
 	
 	func testExample() {
+		println(NSProcessInfo().environment)
 		print ( runtestscript("print_linenumbers.swift") )
 	}
 	
